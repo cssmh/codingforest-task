@@ -1,11 +1,22 @@
-import InfiniteScrollComponent from "./Component/InfiniteScrollComponent";
+import React, { Suspense } from "react";
+const LazyComponent = React.lazy(() =>
+  import("./Component/InfiniteScrollComponent")
+);
 
-const App = () => {
+function App() {
   return (
     <div>
-      <InfiniteScrollComponent />
+      <Suspense
+        fallback={
+          <div className="flex h-screen justify-center items-center">
+            Lazy Loading....
+          </div>
+        }
+      >
+        <LazyComponent />
+      </Suspense>
     </div>
   );
-};
+}
 
 export default App;
